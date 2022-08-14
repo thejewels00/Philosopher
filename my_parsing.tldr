@@ -1,0 +1,643 @@
+{
+  "name": "New Document",
+  "fileHandle": {},
+  "document": {
+    "id": "doc",
+    "name": "New Document",
+    "version": 15.5,
+    "pages": {
+      "page": {
+        "id": "page",
+        "name": "Page 1",
+        "childIndex": 1,
+        "shapes": {
+          "053cca48-c420-409e-2ddf-fc92618c9a96": {
+            "id": "053cca48-c420-409e-2ddf-fc92618c9a96",
+            "type": "rectangle",
+            "name": "Rectangle",
+            "parentId": "page",
+            "childIndex": 1,
+            "point": [
+              705.14,
+              429.48
+            ],
+            "size": [
+              655.34,
+              440.87
+            ],
+            "rotation": 0,
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1
+            },
+            "label": "",
+            "labelPoint": [
+              0.5,
+              0.5
+            ]
+          },
+          "6acf96cf-495f-4a42-15e7-25678a48492b": {
+            "id": "6acf96cf-495f-4a42-15e7-25678a48492b",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 3,
+            "point": [
+              945.49,
+              460.36
+            ],
+            "rotation": 0.022904311882371076,
+            "text": "RUN IF 0 :)",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1.5694856813282614,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "2ca14a38-c3b4-48e5-0283-6f073ec2d6e1": {
+            "id": "2ca14a38-c3b4-48e5-0283-6f073ec2d6e1",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 4,
+            "point": [
+              2206.43,
+              426.82
+            ],
+            "rotation": 0.03422211928531649,
+            "text": "RETURN 0 if = 0 ",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1.6426100816093707,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "78d913ad-e955-4dfd-3f48-b9b2c20ef7ec": {
+            "id": "78d913ad-e955-4dfd-3f48-b9b2c20ef7ec",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 5,
+            "point": [
+              2081.16,
+              438.91
+            ],
+            "rotation": 0,
+            "text": "A",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 4.429999999999996,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "52d308f6-6d21-47e7-0835-c5080e0a886e": {
+            "id": "52d308f6-6d21-47e7-0835-c5080e0a886e",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 6,
+            "point": [
+              2053.89,
+              657.76
+            ],
+            "rotation": 0,
+            "text": "  B",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 3.8187878787878784,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "4a38e6f7-da86-4a9d-1f11-bf2399bfec4e": {
+            "id": "4a38e6f7-da86-4a9d-1f11-bf2399bfec4e",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 7,
+            "point": [
+              2277.78,
+              542.82
+            ],
+            "rotation": 0,
+            "text": "E",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 5.195718499065735,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "7dc4acb3-8632-4cd9-151f-7bfdf3e1ae8a": {
+            "id": "7dc4acb3-8632-4cd9-151f-7bfdf3e1ae8a",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 8,
+            "point": [
+              827.71,
+              490.59
+            ],
+            "rotation": 0,
+            "text": "C",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 4.027727272727274,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "058f7f60-99d9-4cff-2b72-d95db95fb5bb": {
+            "id": "058f7f60-99d9-4cff-2b72-d95db95fb5bb",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 9,
+            "point": [
+              817.21,
+              640.88
+            ],
+            "rotation": 0,
+            "text": "d",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 5.4538095238095226,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "10553dbf-3b64-443d-3481-ab551ad4fc76": {
+            "id": "10553dbf-3b64-443d-3481-ab551ad4fc76",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 10,
+            "point": [
+              1227.22,
+              16.29
+            ],
+            "rotation": 0,
+            "text": "NOMBRE NEGATIVE RETURM ERROR",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1.5359468331846609,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "13562f63-f756-490c-3124-ea42afbdf90e": {
+            "id": "13562f63-f756-490c-3124-ea42afbdf90e",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 11,
+            "point": [
+              1213.92,
+              115.31
+            ],
+            "rotation": 0,
+            "text": "Max_int return error (check in atoi)",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1.5885074780017754,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "7f6c59e7-fc4a-492c-079e-4c51fc99b007": {
+            "id": "7f6c59e7-fc4a-492c-079e-4c51fc99b007",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 14,
+            "point": [
+              1253.03,
+              238.01
+            ],
+            "rotation": 0,
+            "text": "check if is digit in atoi :D",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1.600091347011597,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "cf811790-04de-4faf-0a09-e9b59af1c4ca": {
+            "id": "cf811790-04de-4faf-0a09-e9b59af1c4ca",
+            "type": "rectangle",
+            "name": "Rectangle",
+            "parentId": "page",
+            "childIndex": 15,
+            "point": [
+              1185.87,
+              -10.7
+            ],
+            "size": [
+              967.73,
+              375.18
+            ],
+            "rotation": 0,
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1
+            },
+            "label": "",
+            "labelPoint": [
+              0.5,
+              0.5
+            ]
+          },
+          "70768bd4-9ed0-4589-22ea-aeb68f3fc1c2": {
+            "id": "70768bd4-9ed0-4589-22ea-aeb68f3fc1c2",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 16,
+            "point": [
+              1919.86,
+              79.31
+            ],
+            "size": [
+              200,
+              200
+            ],
+            "text": "atoi return (-1)\n ces un errors alors je quitte mon main avec 1 :)",
+            "rotation": 0,
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "09fce1b7-fe84-4f81-3427-19dc603dc88d": {
+            "id": "09fce1b7-fe84-4f81-3427-19dc603dc88d",
+            "type": "rectangle",
+            "name": "Rectangle",
+            "parentId": "page",
+            "childIndex": 2,
+            "point": [
+              2002.95,
+              401.42
+            ],
+            "size": [
+              710.92,
+              449.08
+            ],
+            "rotation": 0,
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1
+            },
+            "label": "",
+            "labelPoint": [
+              0.5,
+              0.5
+            ]
+          },
+          "f7f01333-ce81-4c07-14b7-709a0410ac02": {
+            "id": "f7f01333-ce81-4c07-14b7-709a0410ac02",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 13,
+            "point": [
+              2465.26,
+              489.82
+            ],
+            "size": [
+              200,
+              296
+            ],
+            "text": "si leur produit = 0;\n return 0\n A: nbr_of_philo\n no one exist !!\n \n B : time_to_die\n pas de chance pour vivre :)\n \n E : cercle \n 0",
+            "rotation": 0,
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "e445ddb6-3e3e-4f81-138e-5186529ac70a": {
+            "id": "e445ddb6-3e3e-4f81-138e-5186529ac70a",
+            "type": "draw",
+            "name": "Draw",
+            "parentId": "page",
+            "childIndex": 17,
+            "point": [
+              2642.8,
+              854.48
+            ],
+            "rotation": 0,
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1
+            },
+            "points": [
+              [
+                0,
+                0,
+                0.5
+              ],
+              [
+                0,
+                0,
+                0.5
+              ]
+            ],
+            "isComplete": true
+          },
+          "9728e624-c0dd-4091-3131-f7cf9141eba3": {
+            "id": "9728e624-c0dd-4091-3131-f7cf9141eba3",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 18,
+            "point": [
+              1082,
+              572.13
+            ],
+            "size": [
+              200,
+              200
+            ],
+            "text": "C time_to_eat :\n il peux manger dan 0ms (tres vite :P)\n \n D : time _to_sleep\n ",
+            "rotation": 0,
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "473e4313-b310-47c4-1a84-8f1ca2f51ef2": {
+            "id": "473e4313-b310-47c4-1a84-8f1ca2f51ef2",
+            "type": "rectangle",
+            "name": "Rectangle",
+            "parentId": "page",
+            "childIndex": 19,
+            "point": [
+              493.72,
+              -182.27
+            ],
+            "size": [
+              2558.37,
+              1542.45
+            ],
+            "rotation": 0,
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1
+            },
+            "label": "",
+            "labelPoint": [
+              0.5,
+              0.5
+            ]
+          },
+          "57a61d9a-c7af-4506-318c-166d8876047a": {
+            "id": "57a61d9a-c7af-4506-318c-166d8876047a",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 20,
+            "point": [
+              1388.03,
+              1184.31
+            ],
+            "rotation": 0,
+            "text": "Eroor mananger :D",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 4.779649122807014,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "cc626543-b02c-4fee-0a9d-193b6ad13c86": {
+            "id": "cc626543-b02c-4fee-0a9d-193b6ad13c86",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 21,
+            "point": [
+              2831.63,
+              1139.31
+            ],
+            "rotation": 0,
+            "text": "1",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 5.421578947368424,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "8147568c-9dce-4395-3ce3-5353dad91aee": {
+            "id": "8147568c-9dce-4395-3ce3-5353dad91aee",
+            "type": "rectangle",
+            "name": "Rectangle",
+            "parentId": "page",
+            "childIndex": 22,
+            "point": [
+              3475.29,
+              1011.94
+            ],
+            "size": [
+              1940.72,
+              1350.13
+            ],
+            "rotation": 0,
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1
+            },
+            "label": "",
+            "labelPoint": [
+              0.5,
+              0.5
+            ]
+          },
+          "978b7c38-329e-4fcb-2762-1b104141402e": {
+            "id": "978b7c38-329e-4fcb-2762-1b104141402e",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 1,
+            "point": [
+              3643.3,
+              1348.96
+            ],
+            "rotation": 0,
+            "text": "struct timeval \n{\n     time_t      tv_sec;  /* secondes */\n    suseconds_t tv_usec; /* microsecondes */\n};",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 2.590996728580039,
+              "font": "script",
+              "textAlign": "start"
+            }
+          },
+          "45febb7d-370c-4f75-3bcd-136e61cb2e2d": {
+            "id": "45febb7d-370c-4f75-3bcd-136e61cb2e2d",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 23,
+            "point": [
+              3787.02,
+              2030.55
+            ],
+            "rotation": 0,
+            "text": "usec * 10^3  + sec * 10^-3.  = time en  millisecondes ",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 2.561403508771934,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "6a7409de-726e-4231-3b9c-c782ad882a2d": {
+            "id": "6a7409de-726e-4231-3b9c-c782ad882a2d",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 24,
+            "point": [
+              5241.55,
+              2103.94
+            ],
+            "rotation": 0,
+            "text": "2",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 5.780000000000006,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "bb13fa7b-bca6-44dd-2cbb-2be4db0cdf01": {
+            "id": "bb13fa7b-bca6-44dd-2cbb-2be4db0cdf01",
+            "type": "rectangle",
+            "name": "Rectangle",
+            "parentId": "page",
+            "childIndex": 25,
+            "point": [
+              3695.44,
+              1930.86
+            ],
+            "size": [
+              1432.49,
+              292.23
+            ],
+            "rotation": 0,
+            "style": {
+              "color": "indigo",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1
+            },
+            "label": "",
+            "labelPoint": [
+              0.5,
+              0.5
+            ]
+          }
+        },
+        "bindings": {}
+      }
+    },
+    "pageStates": {
+      "page": {
+        "id": "page",
+        "selectedIds": [],
+        "camera": {
+          "point": [
+            -3192.44,
+            -658.68
+          ],
+          "zoom": 0.75
+        },
+        "editingId": null
+      }
+    },
+    "assets": {}
+  },
+  "assets": {}
+}
