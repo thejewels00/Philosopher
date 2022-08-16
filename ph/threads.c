@@ -1,4 +1,6 @@
 #include "philo.h"
+#include <sys/time.h>
+
 /*************creating mutexes************/
 pthread_mutex_t	*creat_mutexes(t_args data)
 {
@@ -19,16 +21,22 @@ pthread_mutex_t	*creat_mutexes(t_args data)
 void	*routine(void	*args)
 {
 	t_philo	*philos;
-	/******pense a faire une mutex pour les print :D*********/
-	philos = (t_philo *)args;
-	pthread_mutex_lock(&(philos->mutex[philos->position]));
-	pthread_mutex_lock(&(philos->mutex[(philos->position + 1) % philos->nbr_philo]));
-	printf("thread %d is eating :D\n", philos->position);
-	pthread_mutex_unlock(&(philos->mutex[philos->position]));
-	pthread_mutex_unlock(&(philos->mutex[(philos->position + 1) % philos->nbr_philo]));
-	printf("thread %d is sleeping:D\n", philos->position);  
-	printf("thread %d is thinking :D \n", philos->position);
-	usleep(1000000);
+	struct	timeval	time;
+	while (1)
+	{
+
+		philos = (t_philo *)args;
+		pthread_mutex_lock(&(philos->mutex[philos->position]));
+		pthread_mutex_lock(&(philos->mutex[(philos->position + 1) % philos->nbr_philo]));
+		printf("thread %d is eating :D\n", philos->position);
+		usleep(philos->time_to_eat * 1000);
+		pthread_mutex_unlock(&(philos->mutex[philos->position]));
+		pthread_mutex_unlock(&(philos->mutex[(philos->position + 1) % philos->nbr_philo]));
+		printf("thread %d stop eating :D\n", philos->position);
+		printf("thread %d is sleeping:D\n", philos->position); 
+		usleep(philos->time_to_sleep * 1000);
+		printf("thread %d is thinking :D \n", philos->position);
+	}
 	return (0);	
 }
 
@@ -78,9 +86,9 @@ int	philosophers(t_args *data)
 		tab[i].time_to_sleep = data->time_to_sleep;
 		i++;
 	}
-	if (creat_threads(0, tab, *data) != 0)
+	if (creat_threads(0, tab, *data) != 0)// paire thread 
 		return (1);
-	if (creat_threads(1, tab, *data) != 0)
+	if (creat_threads(1, tab, *data) != 0)// impaire thread
 		return (2);
 	if (join_threads(tab, *data) != 0)
 		return (3);

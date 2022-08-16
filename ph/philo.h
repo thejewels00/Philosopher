@@ -6,7 +6,7 @@
 /*   By: jchennak <jchennak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:49:32 by jchennak          #+#    #+#             */
-/*   Updated: 2022/08/14 23:07:41 by jchennak         ###   ########.fr       */
+/*   Updated: 2022/08/16 19:09:19 by jchennak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef	struct s_philo
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
+	//int				etat;
 	
 }	t_philo;
 
