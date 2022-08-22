@@ -6,7 +6,7 @@
 /*   By: jchennak <jchennak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:49:32 by jchennak          #+#    #+#             */
-/*   Updated: 2022/08/22 14:03:44 by jchennak         ###   ########.fr       */
+/*   Updated: 2022/08/22 18:25:45 by jchennak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <stdlib.h>
-#include <stdio.h> // remove it :D
+#include <stdio.h> 
 #include <sys/time.h>
 
 typedef struct timeval t_time;

@@ -6,12 +6,12 @@
 /*   By: jchennak <jchennak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:06:21 by jchennak          #+#    #+#             */
-/*   Updated: 2022/08/22 15:55:54 by jchennak         ###   ########.fr       */
+/*   Updated: 2022/08/22 18:25:39 by jchennak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <sys/time.h>
+
 /*************convertisseur de temps en ms :D********** */
 long long	time_in_ms(t_time	time)
 {
@@ -19,7 +19,6 @@ long long	time_in_ms(t_time	time)
 
 	return (i = time.tv_sec * 1000 + time.tv_usec * 0.001);
 }
-
 
 /*************creating mutexes************/
 pthread_mutex_t	*creat_mutexes(t_args data)
@@ -171,7 +170,7 @@ int	philosophers(t_args *data)
 	preparation_donnee(tab, data);
 	if (creat_threads(0, tab, *data) != 0)// paire thread 
 		return (1);
-	usleep(data->nbr_philo * 0.6);
+	usleep(data->nbr_philo * 0.3);
 	if (creat_threads(1, tab, *data) != 0)// impaire thread
 		return (2);
 	if (detach_threads(tab, *data) != 0)// detach all the threads and remove the waiting so you can surpervisee the threads
@@ -181,3 +180,4 @@ int	philosophers(t_args *data)
 	return (0);
 }
 
+ 

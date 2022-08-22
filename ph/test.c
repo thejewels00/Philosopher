@@ -36,7 +36,6 @@ int main()
 	usleep(1000000);
 	gettimeofday(&end, NULL);
 	printf("hello it's 2 : %lld\n", time_in_ms(end) - time_in_ms(start));
-
 	}
 
 }
