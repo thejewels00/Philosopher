@@ -6,7 +6,7 @@
 /*   By: jchennak <jchennak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:06:21 by jchennak          #+#    #+#             */
-/*   Updated: 2022/08/21 23:25:09 by jchennak         ###   ########.fr       */
+/*   Updated: 2022/08/22 15:55:54 by jchennak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ pthread_mutex_t	*creat_mutexes(t_args data)
 	pthread_mutex_t *mutex;
 	int				i;
 	
-	mutex = malloc(sizeof(pthread_mutex_t));
+	mutex = malloc(sizeof(pthread_mutex_t) * data.nbr_philo); //  tkayssi a jawaher XD
 	if(!mutex)
 		return (NULL);
 	i = 0;
@@ -39,6 +39,7 @@ pthread_mutex_t	*creat_mutexes(t_args data)
 	return (mutex);
 }
 
+/****************affichage des information avec mutexes *********/
 void print_action(char *str, t_philo	data, int	suspend)
 {
 	t_time	end;
@@ -61,8 +62,8 @@ void	*routine(void	*args)
 	
 	i = 0;
 	
-//	while (1)
-	//{
+	while (1)
+	{
 		pthread_mutex_lock(&(philos->mutex[philos->position]));
 		//********************************
 		print_action("has taken a RIGHT fork", *philos, 0);
@@ -90,7 +91,7 @@ void	*routine(void	*args)
 		pthread_mutex_unlock(&(philos->mutex[(philos->position + 1) % philos->info->nbr_philo]));
 		print_action("is sleeping", *philos, philos->info->time_to_sleep);
 		print_action("is thinking", *philos, 0);
-//	}
+	}
 	return (0);	
 }
 
@@ -108,7 +109,7 @@ int	creat_threads(int i, t_philo *tab, t_args data)
 }
 
 /************join_all_mutexes***************************/
-int join_threads(t_philo *tab, t_args data)
+int detach_threads(t_philo *tab, t_args data)
 {
 	int i;
 
@@ -170,10 +171,10 @@ int	philosophers(t_args *data)
 	preparation_donnee(tab, data);
 	if (creat_threads(0, tab, *data) != 0)// paire thread 
 		return (1);
+	usleep(data->nbr_philo * 0.6);
 	if (creat_threads(1, tab, *data) != 0)// impaire thread
 		return (2);
-	usleep(5);
-	if (join_threads(tab, *data) != 0)// detach all the threads and remove the waiting so you can surpervisee the threads
+	if (detach_threads(tab, *data) != 0)// detach all the threads and remove the waiting so you can surpervisee the threads
 		return (3);
 	pthread_mutex_destroy(&(data->mtx));
 	destroy_all(tab->mutex, data->nbr_philo);

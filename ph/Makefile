@@ -1,7 +1,7 @@
 LIBRARY = philo
 #LIBRARY_BONUS
 CC = @cc
-CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 SRC =	main.c \
 		ft_atoi.c \
 		threads.c \
