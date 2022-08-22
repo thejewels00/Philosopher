@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   threads.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jchennak <jchennak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/20 18:06:21 by jchennak          #+#    #+#             */
+/*   Updated: 2022/08/21 23:25:09 by jchennak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 #include <sys/time.h>
 /*************convertisseur de temps en ms :D********** */
-long long	time_in_ms(struct timeval	time)
+long long	time_in_ms(t_time	time)
 {
 	long long	i;
 
@@ -14,6 +26,7 @@ pthread_mutex_t	*creat_mutexes(t_args data)
 {
 	pthread_mutex_t *mutex;
 	int				i;
+	
 	mutex = malloc(sizeof(pthread_mutex_t));
 	if(!mutex)
 		return (NULL);
@@ -25,42 +38,59 @@ pthread_mutex_t	*creat_mutexes(t_args data)
 	}
 	return (mutex);
 }
- 
+
+void print_action(char *str, t_philo	data, int	suspend)
+{
+	t_time	end;
+	
+	if (suspend != 0)
+		usleep(suspend * 1000);
+	pthread_mutex_lock(&(data.info->mtx));
+	gettimeofday(&end, 	NULL);
+	printf("%lld %d %s\n", (time_in_ms(end) - time_in_ms(*(data.start))), data.position + 1, str);
+	pthread_mutex_unlock(&(data.info->mtx));
+}
+
  /*************Mon routine******************************/
 void	*routine(void	*args)
 {
 	t_philo	*philos;
-	struct	timeval	end;
-	struct	timeval	feat;
-
-	feat.tv_sec = 0;
-	feat.tv_usec = 0;
+//	t_time	end;
 	philos = (t_philo *)args;
-	while (*(philos->etat) == 0)
-	{
+	int	i;
+	
+	i = 0;
+	
+//	while (1)
+	//{
 		pthread_mutex_lock(&(philos->mutex[philos->position]));
-		pthread_mutex_lock(&(philos->mutex[(philos->position + 1) % philos->nbr_philo]));
-		gettimeofday(&end, NULL);
-		if ((time_in_ms(end) - time_in_ms(feat)) >= philos->time_to_die)
-		{
-			*(philos->etat) = 1;
-			printf("%lld  %d is dead XD\n", time_in_ms(end) - time_in_ms(*(philos->start)), philos->position + 1);
-			return (0);
-		}
-		printf("%d\n", *(philos->etat));
-		printf("%lld  %d has taken a fork\n", time_in_ms(end) - time_in_ms(*(philos->start)), philos->position + 1);
-		gettimeofday(&end, NULL);
-		printf("%lld  %d is eating\n", time_in_ms(end) - time_in_ms(*(philos->start)), philos->position + 1);
-		usleep(philos->time_to_eat * 1000);
+		//********************************
+		print_action("has taken a RIGHT fork", *philos, 0);
+		// gettimeofday(&end, NULL);
+		// pthread_mutex_lock(&(philos->info->mtx));
+		// printf("%lld %d has taken a RIGHT fork\n", time_in_ms(end) - time_in_ms(*(philos->start)), philos->position + 1);
+		// pthread_mutex_unlock(&(philos->info->mtx));
+		//****************************************
+		pthread_mutex_lock(&(philos->mutex[(philos->position + 1) % philos->info->nbr_philo]));
+		//*************************************
+		print_action("has taken a LEFT fork", *philos, 0);
+		// gettimeofday(&end, NULL);
+		// pthread_mutex_lock(&(philos->info->mtx));
+		// printf("%lld %d has taken a LEFT fork\n", time_in_ms(end) - time_in_ms(*(philos->start)), philos->position + 1);
+		// pthread_mutex_unlock(&(philos->info->mtx));
+		//**************************************
+		print_action("is eating", *philos, 0);
+		// gettimeofday(&end, NULL);
+		// pthread_mutex_lock(&(philos->info->mtx));
+		// printf("%lld %d is eating\n", time_in_ms(end) - time_in_ms(*(philos->start)), philos->position + 1);
+		// pthread_mutex_unlock(&(philos->info->mtx));
+		//*******************************************
+		usleep(philos->info->time_to_eat * 1000);
 		pthread_mutex_unlock(&(philos->mutex[philos->position]));
-		pthread_mutex_unlock(&(philos->mutex[(philos->position + 1) % philos->nbr_philo]));
-		printf("%lld  %d stop eating\n", time_in_ms(feat) - time_in_ms(*(philos->start)), philos->position + 1);
-		gettimeofday(&feat, NULL);
-		printf("%lld  %d is sleeping\n", time_in_ms(feat) - time_in_ms(*(philos->start)), philos->position + 1); 
-		usleep(philos->time_to_sleep * 1000);
-		gettimeofday(&end, NULL);
-		printf("%lld  %d is thinking\n", time_in_ms(end) - time_in_ms(*(philos->start)),philos->position + 1);
-	}
+		pthread_mutex_unlock(&(philos->mutex[(philos->position + 1) % philos->info->nbr_philo]));
+		print_action("is sleeping", *philos, philos->info->time_to_sleep);
+		print_action("is thinking", *philos, 0);
+//	}
 	return (0);	
 }
 
@@ -92,30 +122,42 @@ int join_threads(t_philo *tab, t_args data)
 	return (0);
 }
 
+
+/************destroy all mutexes***************************/
+void destroy_all(pthread_mutex_t *tab, int nbr)
+{
+	int	i;
+		
+	i = 0;
+	while(i < nbr)
+	{
+		pthread_mutex_destroy(&tab[i]);
+		i++;
+	}
+}
+
 /***********remplissage de  mutexes data *****************/
-void	preparation_donnee(t_philo *tab, t_args data)
+void	preparation_donnee(t_philo *tab, t_args *data)
 {
 	int	i;
 	pthread_mutex_t	*mtx;
-	struct timeval	*time;
-	int				*etat;
+	t_time			*time;
+	//int				*etat;
 
-	mtx = creat_mutexes(data);
+	pthread_mutex_init(&(data->mtx), NULL);
+	mtx = creat_mutexes(*data);
 	time = malloc(sizeof(struct timeval));
-	etat = malloc(sizeof(int));
+	//etat = malloc(sizeof(int));
 	i = 0;
-	while (i < data.nbr_philo)
+	while (i < data->nbr_philo)
 	{
 		tab[i].mutex = mtx; /*giving adress to all your mutex*/
-		tab[i].nbr_philo = data.nbr_philo;
-		tab[i].time_to_die = data.time_to_die;
-		tab[i].time_to_eat = data.time_to_eat;
-		tab[i].time_to_sleep = data.time_to_sleep;
+		tab[i].info = data;
 		tab[i].start = time;
-		tab[i].etat = etat;
+	//	tab[i].etat = etat;
 		i++;
 	}
-	*etat = 0;
+	//*etat = 0;
 	gettimeofday(time,	NULL);
 }
 
@@ -125,12 +167,16 @@ int	philosophers(t_args *data)
 	t_philo			*tab;
 
 	tab = (t_philo *)malloc(data->nbr_philo * sizeof(t_philo));
-	preparation_donnee(tab, *data);
+	preparation_donnee(tab, data);
 	if (creat_threads(0, tab, *data) != 0)// paire thread 
 		return (1);
 	if (creat_threads(1, tab, *data) != 0)// impaire thread
 		return (2);
-	if (join_threads(tab, *data) != 0)
+	usleep(5);
+	if (join_threads(tab, *data) != 0)// detach all the threads and remove the waiting so you can surpervisee the threads
 		return (3);
+	pthread_mutex_destroy(&(data->mtx));
+	destroy_all(tab->mutex, data->nbr_philo);
 	return (0);
 }
+

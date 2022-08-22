@@ -1,5 +1,7 @@
 {
 	"files.associations": {
-		"TESTER.C": "cpp"
+		"TESTER.C": "cpp",
+		"pthread.h": "c",
+		"stdlib.h": "c"
 	}
 }

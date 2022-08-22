@@ -6,7 +6,7 @@
 /*   By: jchennak <jchennak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:49:32 by jchennak          #+#    #+#             */
-/*   Updated: 2022/08/17 15:53:33 by jchennak         ###   ########.fr       */
+/*   Updated: 2022/08/21 20:42:24 by jchennak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,26 @@
 #include <stdio.h> // remove it :D
 #include <sys/time.h>
 
+typedef struct timeval t_time;
+
 typedef struct s_args
 {
-	int	nbr_philo;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	life_cercle;
-}	t_args;
-
-typedef	struct s_philo
-{
-	int	position;
-	pthread_mutex_t	*mutex; // je vas cree une adresse ou tout les  threads acceder a ce tableau :)
-	pthread_t		tr;
 	int				nbr_philo;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				*etat;
-	struct timeval	*start;
+	int				life_cercle;
+	pthread_mutex_t	mtx;
+}	t_args;
+
+typedef	struct s_philo
+{
+	int				position; // positon
+	pthread_mutex_t	*mutex; // je vas cree une adresse ou tout les  threads acceder a ce tableau :)
+	pthread_t		tr;	// thread
+	t_args			*info;
+	//int				*etat;
+	t_time			*start;
 		
 }	t_philo;
 
@@ -46,6 +46,6 @@ int				ft_atoi(char *str);
 int				philosophers(t_args *data);
 int				input(char **av, t_args *inp, int argc);
 pthread_mutex_t	*creat_mutexes(t_args data);
-void	preparation_donnee(t_philo *tab, t_args data);
+void			preparation_donnee(t_philo *tab, t_args *data);
 
 #endif

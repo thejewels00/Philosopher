@@ -1,53 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jchennak <jchennak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/20 17:27:42 by jchennak          #+#    #+#             */
+/*   Updated: 2022/08/20 18:14:54 by jchennak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 #include <stdio.h>
 
-// int check_input(t_args inp)
-// {
-// 	if((inp->life_cercle * inp->nbr_philo * inp->time_to_die) == 0)
-// 		return (-1);
-	
-// }
-
-
-int	input(char **av, t_args *inp, int argc)
+int	main(int argc, char **argv)
 {
-	if (argc != 5 && argc != 6)
-		return (-1);
-	inp->nbr_philo = ft_atoi(av[1]);
-	inp->time_to_die = ft_atoi(av[2]);
-	inp->time_to_eat = ft_atoi(av[3]);
-	inp->time_to_sleep = ft_atoi(av[4]);
-	inp->life_cercle = 1;
-	if (av[5])
-		inp->life_cercle = ft_atoi(av[5]);
-	if (inp->life_cercle == -1 || inp->nbr_philo == -1 || inp->time_to_die == -1
-		|| inp->time_to_eat == -1 || inp->time_to_sleep == -1)
-		return (-1);
-	if((inp->life_cercle * inp->nbr_philo * inp->time_to_die) == 0)
-		return (0);
-	return (1);
-}
-
-
-
-int main(int argc, char **argv)
-{
-	t_args	time;
+	t_args	*time;
 	int		i;
-
-	i = input(argv, &time, argc);
-	if(i == 1)
+	
+	time = (t_args *)malloc(sizeof(t_args));
+	i = input(argv, time, argc);
+	if (i == 1)
 	{
-		if (philosophers(&time)!= 0)
+		if (philosophers(time) != 0)
+		{
 			return (1);
+			free(time);
+		}
 	}
 	else if (i == -1)
 	{
 		write(2,
-		"USAGE : ./philo NB_OF_PHILO TO_DIE TO_EAT TO_SLEEP OPTIONELLE[NB_FOR_EAT]\n", 75);
+			"USAGE : ./philo NB_PHILO TO_DIE TO_EAT TO_SLEEP OPTIONE[NB_EAT]\n",
+			75);
+		free(time);
 		return (1);
 	}
+	free(time);
 	return (0);
 }
-
-
