@@ -6,7 +6,7 @@
 /*   By: jchennak <jchennak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:06:21 by jchennak          #+#    #+#             */
-/*   Updated: 2022/08/22 18:25:39 by jchennak         ###   ########.fr       */
+/*   Updated: 2022/08/23 03:31:39 by jchennak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,22 @@ long long	time_in_ms(t_time	time)
 	long long	i;
 
 	return (i = time.tv_sec * 1000 + time.tv_usec * 0.001);
+}
+
+/*************correction de usleep ****/
+void  go_to_sleep(int	suspend)
+{
+	t_time 	start;
+	t_time	end;
+	
+	gettimeofday(&start, NULL);
+	usleep(suspend * 0.9);
+	gettimeofday(&end, NULL);
+	while((time_in_ms(end) - time_in_ms(start)) < (suspend * 0.001))
+	{
+		usleep(50);
+		gettimeofday(&end, NULL);
+	}
 }
 
 /*************creating mutexes************/
@@ -44,7 +60,8 @@ void print_action(char *str, t_philo	data, int	suspend)
 	t_time	end;
 	
 	if (suspend != 0)
-		usleep(suspend * 1000);
+		go_to_sleep(suspend * 1000);
+		//usleep(suspend * 1000);
 	pthread_mutex_lock(&(data.info->mtx));
 	gettimeofday(&end, 	NULL);
 	printf("%lld %d %s\n", (time_in_ms(end) - time_in_ms(*(data.start))), data.position + 1, str);
@@ -55,43 +72,27 @@ void print_action(char *str, t_philo	data, int	suspend)
 void	*routine(void	*args)
 {
 	t_philo	*philos;
-//	t_time	end;
+	t_time	meal;
+	
+	philos->nb_meal = 1;
 	philos = (t_philo *)args;
-	int	i;
-	
-	i = 0;
-	
 	while (1)
 	{
 		pthread_mutex_lock(&(philos->mutex[philos->position]));
-		//********************************
-		print_action("has taken a RIGHT fork", *philos, 0);
-		// gettimeofday(&end, NULL);
-		// pthread_mutex_lock(&(philos->info->mtx));
-		// printf("%lld %d has taken a RIGHT fork\n", time_in_ms(end) - time_in_ms(*(philos->start)), philos->position + 1);
-		// pthread_mutex_unlock(&(philos->info->mtx));
-		//****************************************
+		print_action("has taken a fork", *philos, 0);
 		pthread_mutex_lock(&(philos->mutex[(philos->position + 1) % philos->info->nbr_philo]));
-		//*************************************
-		print_action("has taken a LEFT fork", *philos, 0);
-		// gettimeofday(&end, NULL);
-		// pthread_mutex_lock(&(philos->info->mtx));
-		// printf("%lld %d has taken a LEFT fork\n", time_in_ms(end) - time_in_ms(*(philos->start)), philos->position + 1);
-		// pthread_mutex_unlock(&(philos->info->mtx));
-		//**************************************
+		print_action("has taken a fork", *philos, 0);
+		gettimeofday(&(philos->meal), NULL);
 		print_action("is eating", *philos, 0);
-		// gettimeofday(&end, NULL);
-		// pthread_mutex_lock(&(philos->info->mtx));
-		// printf("%lld %d is eating\n", time_in_ms(end) - time_in_ms(*(philos->start)), philos->position + 1);
-		// pthread_mutex_unlock(&(philos->info->mtx));
-		//*******************************************
-		usleep(philos->info->time_to_eat * 1000);
+		philos->nb_meal++;
+		go_to_sleep(philos->info->time_to_eat * 1000);
 		pthread_mutex_unlock(&(philos->mutex[philos->position]));
 		pthread_mutex_unlock(&(philos->mutex[(philos->position + 1) % philos->info->nbr_philo]));
+		//gettimeofday(&(philos->last_meal), NULL);
 		print_action("is sleeping", *philos, philos->info->time_to_sleep);
 		print_action("is thinking", *philos, 0);
 	}
-	return (0);	
+	return (0);
 }
 
 /***************creating threads**********************/
@@ -161,6 +162,31 @@ void	preparation_donnee(t_philo *tab, t_args *data)
 	gettimeofday(time,	NULL);
 }
 
+
+/****** check threads************/
+int check_all(t_philo *tab, int nb_philos, int time_to_die)
+{
+	int	i;
+	t_time cur;	
+	
+	while(1)
+	{
+		i = 0;
+		while(i < nb_philos)
+		{
+			gettimeofday(&cur, NULL);
+			if ((time_in_ms(tab[i].meal)- time_in_ms(cur)) >= time_to_die)
+			{
+				// mutex 
+				printf("%lld %d is died\n", time_in_ms(*(tab[i].start)) - time_in_ms(cur));	
+				return (0);
+			}
+			else if (tab[i])
+			i++;
+		}
+	}
+	return (0);
+}
 /*****************Gestion des philosophers***************/
 int	philosophers(t_args *data)
 {
@@ -170,9 +196,10 @@ int	philosophers(t_args *data)
 	preparation_donnee(tab, data);
 	if (creat_threads(0, tab, *data) != 0)// paire thread 
 		return (1);
-	usleep(data->nbr_philo * 0.3);
+	usleep(data->nbr_philo * 50);
 	if (creat_threads(1, tab, *data) != 0)// impaire thread
 		return (2);
+	check_all(tab, data->nbr_philo, data->time_to_die);
 	if (detach_threads(tab, *data) != 0)// detach all the threads and remove the waiting so you can surpervisee the threads
 		return (3);
 	pthread_mutex_destroy(&(data->mtx));

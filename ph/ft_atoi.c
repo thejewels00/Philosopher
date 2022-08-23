@@ -6,7 +6,7 @@
 /*   By: jchennak <jchennak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:04:38 by jchennak          #+#    #+#             */
-/*   Updated: 2022/08/21 15:50:52 by jchennak         ###   ########.fr       */
+/*   Updated: 2022/08/23 03:02:07 by jchennak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ int	input(char **av, t_args *inp, int argc)
 	if (inp->life_cercle == -1 || inp->nbr_philo == -1 || inp->time_to_die == -1
 		|| inp->time_to_eat == -1 || inp->time_to_sleep == -1)
 		return (-1);
-	if ((inp->life_cercle * inp->nbr_philo * inp->time_to_die) == 0)
-		return (0);
+	if ((inp->life_cercle * inp->nbr_philo * inp->time_to_die * inp->time_to_eat 
+				* inp->time_to_sleep) == 0)
+		return (-1);
 	return (1);
 }
 

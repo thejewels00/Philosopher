@@ -6,7 +6,7 @@
 /*   By: jchennak <jchennak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:49:32 by jchennak          #+#    #+#             */
-/*   Updated: 2022/08/22 18:25:45 by jchennak         ###   ########.fr       */
+/*   Updated: 2022/08/23 03:10:51 by jchennak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef	struct s_philo
 	t_args			*info;
 	//int				*etat;
 	t_time			*start;
+	t_time			meal;
+	int				nb_meal;
 		
 }	t_philo;
 

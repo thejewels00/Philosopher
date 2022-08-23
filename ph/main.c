@@ -6,7 +6,7 @@
 /*   By: jchennak <jchennak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:27:42 by jchennak          #+#    #+#             */
-/*   Updated: 2022/08/22 17:30:45 by jchennak         ###   ########.fr       */
+/*   Updated: 2022/08/23 03:04:33 by jchennak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 	{
 		write(2,
 			"USAGE : ./philo NB_PHILO TO_DIE TO_EAT TO_SLEEP OPTIONE[NB_EAT]\n",
-			75);
+			65);
 		free(time);
 		return (1);
 	}
