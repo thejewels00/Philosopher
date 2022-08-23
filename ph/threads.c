@@ -6,7 +6,7 @@
 /*   By: jchennak <jchennak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:06:21 by jchennak          #+#    #+#             */
-/*   Updated: 2022/08/23 03:31:39 by jchennak         ###   ########.fr       */
+/*   Updated: 2022/08/23 03:46:43 by jchennak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,8 @@ void print_action(char *str, t_philo	data, int	suspend)
 void	*routine(void	*args)
 {
 	t_philo	*philos;
-	t_time	meal;
 	
-	philos->nb_meal = 1;
+	//philos->nb_meal = 1;
 	philos = (t_philo *)args;
 	while (1)
 	{
@@ -84,7 +83,7 @@ void	*routine(void	*args)
 		print_action("has taken a fork", *philos, 0);
 		gettimeofday(&(philos->meal), NULL);
 		print_action("is eating", *philos, 0);
-		philos->nb_meal++;
+		//philos->nb_meal++;
 		go_to_sleep(philos->info->time_to_eat * 1000);
 		pthread_mutex_unlock(&(philos->mutex[philos->position]));
 		pthread_mutex_unlock(&(philos->mutex[(philos->position + 1) % philos->info->nbr_philo]));
@@ -175,13 +174,15 @@ int check_all(t_philo *tab, int nb_philos, int time_to_die)
 		while(i < nb_philos)
 		{
 			gettimeofday(&cur, NULL);
-			if ((time_in_ms(tab[i].meal)- time_in_ms(cur)) >= time_to_die)
+			if ((time_in_ms(cur) - time_in_ms(tab[i].meal)) >= time_to_die)
 			{
+				
 				// mutex 
-				printf("%lld %d is died\n", time_in_ms(*(tab[i].start)) - time_in_ms(cur));	
+				printf("%lld %d is died\n", (time_in_ms(cur) - time_in_ms(*(tab[i].start))), tab[i].position + 1);	
 				return (0);
 			}
-			else if (tab[i])
+			//else if (tab[i])
+			usleep(30);
 			i++;
 		}
 	}
