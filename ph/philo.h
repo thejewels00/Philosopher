@@ -13,6 +13,8 @@
 #ifndef PHILO_H
 # define PHILO_H
 
+
+
 #include <unistd.h>
 #include <pthread.h>
 #include <stdlib.h>
@@ -41,6 +43,7 @@ typedef	struct s_philo
 	t_time			*start;
 	t_time			meal;
 	int				nb_meal;
+	int				i;
 		
 }	t_philo;
 

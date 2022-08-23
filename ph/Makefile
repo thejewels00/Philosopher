@@ -1,7 +1,7 @@
 LIBRARY = philo
 #LIBRARY_BONUS
 CC = @cc
-CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address 
 SRC =	main.c \
 		ft_atoi.c \
 		threads.c \
@@ -26,7 +26,7 @@ fclean : clean
 re : fclean all
 
 $(LIBRARY) : $(OBJECT_FILE) 
-	$(CC) $(CFLAGS)  $(OBJECT_FILE) -o $(LIBRARY)
+	$(CC) $(CFLAGS) -pthread $(OBJECT_FILE) -o $(LIBRARY)
 	@printf "\033[1;33m****PHILO compiled Succesfully ! ****\033[0m\n"
 
 
