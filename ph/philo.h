@@ -6,7 +6,7 @@
 /*   By: jchennak <jchennak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:49:32 by jchennak          #+#    #+#             */
-/*   Updated: 2022/08/23 03:10:51 by jchennak         ###   ########.fr       */
+/*   Updated: 2022/08/23 19:35:39 by jchennak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ typedef struct s_args
 typedef	struct s_philo
 {
 	int				position; // positon
+	pthread_mutex_t	meals;
 	pthread_mutex_t	*mutex; // je vas cree une adresse ou tout les  threads acceder a ce tableau :)
 	pthread_t		tr;	// thread
 	t_args			*info;
 	//int				*etat;
-	t_time			*start;
+	t_time			start;
 	t_time			meal;
 	int				nb_meal;
 	int				i;

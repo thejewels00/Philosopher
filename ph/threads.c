@@ -6,7 +6,7 @@
 /*   By: jchennak <jchennak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:06:21 by jchennak          #+#    #+#             */
-/*   Updated: 2022/08/23 03:46:43 by jchennak         ###   ########.fr       */
+/*   Updated: 2022/08/23 19:47:42 by jchennak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void print_action(char *str, t_philo	data, int	suspend)
 		//usleep(suspend * 1000);
 	pthread_mutex_lock(&(data.info->mtx));
 	gettimeofday(&end, 	NULL);
-	printf("%lld %d %s\n", (time_in_ms(end) - time_in_ms(*(data.start))), data.position + 1, str);
+	printf("%lld %d %s\n", (time_in_ms(end) - time_in_ms(data.start)), data.position + 1, str);
 	pthread_mutex_unlock(&(data.info->mtx));
 }
 
@@ -82,12 +82,16 @@ void	*routine(void	*args)
 		print_action("has taken a fork", *philos, 0);
 		pthread_mutex_lock(&(philos->mutex[(philos->position + 1) % philos->info->nbr_philo]));
 		print_action("has taken a fork", *philos, 0);
+		pthread_mutex_lock(&philos->meals);
 		gettimeofday(&(philos->meal), NULL);
+		pthread_mutex_unlock(&philos->meals);
 		print_action("is eating", *philos, 0);
-		philos->nb_meal++;
 		go_to_sleep(philos->info->time_to_eat * 1000);
-		pthread_mutex_unlock(&(philos->mutex[philos->position]));
+		pthread_mutex_lock(&philos->meals);
+		philos->nb_meal++;
+		pthread_mutex_unlock(&philos->meals);
 		pthread_mutex_unlock(&(philos->mutex[(philos->position + 1) % philos->info->nbr_philo]));
+		pthread_mutex_unlock(&(philos->mutex[philos->position])); // tkayssi ajawahir
 		//gettimeofday(&(philos->last_meal), NULL);
 		print_action("is sleeping", *philos, philos->info->time_to_sleep);
 		print_action("is thinking", *philos, 0);
@@ -103,6 +107,8 @@ int	creat_threads(int i, t_philo *tab, t_args data)
 		tab[i].position = i;
 		if (pthread_create(&(tab[i].tr), NULL, &routine, &tab[i]) != 0)//arguments // n'oublier pas de proteger cette fonction :D // je doit envoyer a chaque fois la case de  thread qui le corresponde :D
 			return (write(2, "ERROR : CREAT THREAD :D\n", 24));
+		if (pthread_detach(tab[i].tr))
+			return (write(2, "ERROR : DETACH THREAD :D\n", 24));
 		i += 2;
 	}
 	return (0);
@@ -141,26 +147,25 @@ void	preparation_donnee(t_philo *tab, t_args *data)
 {
 	int	i;
 	pthread_mutex_t	*mtx;
-	t_time			*time;
+	// t_time			*time;
 	//int				*etat;
 
 	pthread_mutex_init(&(data->mtx), NULL);
 	mtx = creat_mutexes(*data);
-	time = malloc(sizeof(struct timeval));
 	//etat = malloc(sizeof(int));
 	i = 0;
 	while (i < data->nbr_philo)
 	{
 		tab[i].mutex = mtx; /*giving adress to all your mutex*/
 		tab[i].info = data;
-		tab[i].start = time;
+		gettimeofday(&(tab[i].start), NULL);
+		tab[i].meal = tab[i].start;
+		pthread_mutex_init(&(tab[i].meals), NULL);
 	//	tab[i].etat = etat;
 		i++;
 	}
 	//*etat = 0;
-	gettimeofday(time,	NULL);
 }
-
 
 /****** check threads************/
 int check_all(t_philo *tab, int nb_philos, int time_to_die)
@@ -171,24 +176,33 @@ int check_all(t_philo *tab, int nb_philos, int time_to_die)
 	while(1)
 	{
 		i = 0;
+		pthread_mutex_lock(&(tab[i].info->mtx));
 		while(i < nb_philos)
 		{
+			pthread_mutex_lock(&(tab[i].meals));
 			gettimeofday(&cur, NULL);
 			if ((time_in_ms(cur) - time_in_ms(tab[i].meal)) >= time_to_die)
 			{
 				// mutex 
-				printf("%lld %d is died\n", (time_in_ms(cur) - time_in_ms(*(tab[i].start))), tab[i].position + 1);	
-				detach_threads(tab, *(tab[0].info));
+				printf("%lld %d is died\n", (time_in_ms(cur) - time_in_ms(tab[i].start)), tab[i].position + 1);
 				return (0);
 			}
-			// else if (tab[i].nb_meal == tab[i].info->life_cercle)
-			// 	pthread_detach(tab[i].tr);
-			usleep(10);
+			pthread_mutex_unlock(&(tab[i].meals));
 			i++;
 		}
+		// while (i < nb_philos)
+		// {
+		// 	if(tab[i].nb_meal == tab[i].info->life_cercle)
+		// 	{
+				
+		// 	}
+		// }
+		pthread_mutex_unlock(&(tab[--i].info->mtx));
+		usleep(50);
 	}
 	return (0);
 }
+
 /*****************Gestion des philosophers***************/
 int	philosophers(t_args *data)
 {
@@ -208,5 +222,3 @@ int	philosophers(t_args *data)
 	destroy_all(tab->mutex, data->nbr_philo);
 	return (0);
 }
-
- 
