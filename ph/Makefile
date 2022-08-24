@@ -1,17 +1,13 @@
 LIBRARY = philo
-#LIBRARY_BONUS
 CC = @cc
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address 
+CFLAGS = -Wall -Werror -Wextra -g
 SRC =	main.c \
 		ft_atoi.c \
 		threads.c \
+		pthread_1.c \
 
-
-#SRC_BONUS =
 
 OBJECT_FILE = $(SRC:%.c=%.o)
-
-#OBJECT_FILE_BONUS = $(SRC_BONUS:%.c=%.o)
 
 all : $(LIBRARY) 
 

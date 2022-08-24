@@ -6,7 +6,7 @@
 /*   By: jchennak <jchennak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:27:42 by jchennak          #+#    #+#             */
-/*   Updated: 2022/08/23 03:04:33 by jchennak         ###   ########.fr       */
+/*   Updated: 2022/08/24 00:40:51 by jchennak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ int	main(int argc, char **argv)
 {
 	t_args	*time;
 	int		i;
-	
+
 	time = (t_args *)malloc(sizeof(t_args));
+	if (!time)
+		return (0);
 	i = input(argv, time, argc);
 	if (i == 1)
 	{
