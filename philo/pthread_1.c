@@ -6,7 +6,7 @@
 /*   By: jchennak <jchennak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 01:01:31 by jchennak          #+#    #+#             */
-/*   Updated: 2022/08/24 01:29:51 by jchennak         ###   ########.fr       */
+/*   Updated: 2022/08/24 04:10:41 by jchennak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	preparation_donnee(t_philo *tab, t_args *data)
 	i = 0;
 	while (i < data->nbr_philo)
 	{
+		tab[i].nb_meal = 0;
 		tab[i].mutex = mtx;
 		tab[i].info = data;
 		gettimeofday(&(tab[i].start), NULL);

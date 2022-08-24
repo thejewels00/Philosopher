@@ -6,7 +6,7 @@
 /*   By: jchennak <jchennak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:06:21 by jchennak          #+#    #+#             */
-/*   Updated: 2022/08/24 01:13:15 by jchennak         ###   ########.fr       */
+/*   Updated: 2022/08/24 04:09:02 by jchennak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	*routine(void	*args)
 	t_philo	*philos;
 
 	philos = (t_philo *)args;
-	philos->nb_meal = 0;
 	while (1)
 	{
 		pthread_mutex_lock(&(philos->mutex[philos->position]));

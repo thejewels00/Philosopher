@@ -1,6 +1,6 @@
 LIBRARY = philo
 CC = @cc
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra -g -fsanitize=thread
 SRC =	main.c \
 		ft_atoi.c \
 		threads.c \
